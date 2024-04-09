@@ -103,11 +103,11 @@ async def get_wallet_nft(address: str, chain: str):
 
     for item in result_items:
         response_nft = {
-            "amount": item.amount,
-            "token_id": item.token_id,
+            "amount": int(item.amount),
+            "token_id": int(item.token_id),
             "token_address": item.token_address,
             "contract_type": item.contract_type,
-            "block_number": item.block_number,
+            "block_number": int(item.block_number),
             "name": getattr(item, "metadata_name", "Unknown"),
             "description": getattr(
                 item, "metadata_description", "No description provided."
@@ -118,3 +118,4 @@ async def get_wallet_nft(address: str, chain: str):
         response.append(response_nft)
 
     return json.dumps(response)
+
