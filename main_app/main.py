@@ -12,6 +12,8 @@ from main_app.api.api_admin import router as admin_router
 from main_app.api.api_v1 import router as api_router
 from main_app.logging_configurator import configure_logging
 
+from fastapi.middleware.cors import CORSMiddleware
+
 configure_logging()
 logger = logging.getLogger(__name__)
 logger.info("Server restarted")
@@ -20,6 +22,16 @@ app = FastAPI()
 templates = Jinja2Templates(directory="templates")
 admin = create_admin(
     tables=[BaseUser]  # Add any Piccolo tables you want to manage here.
+)
+
+origins = ["*"]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
 )
 
 
