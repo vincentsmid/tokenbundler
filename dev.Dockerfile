@@ -15,9 +15,6 @@ RUN pip install poetry
 RUN poetry config virtualenvs.create false \
     && poetry install --only main
 
-# Replace '/Users/user/GreenPanda/cdn/filedir' with '/usr/src/app/files/Uploads' in Caddyfile
-# RUN sed -i 's|/Users/user/GreenPanda/cdn/filedir|/usr/src/app/files/Uploads|g' /etc/caddy/Caddyfile
-
 # Command to run the Uvicorn server
 CMD ["sh", "-c", "bash /usr/src/app/bin/dev/migrate.sh && poetry run uvicorn main_app.main:app --host 0 --port 8000 --reload"]
 
